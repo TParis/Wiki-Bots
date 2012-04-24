@@ -1,8 +1,5 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
 ini_set('memory_limit','16M');
 
 require_once( '/home/tparis/Peachy/Init.php' );
@@ -12,12 +9,12 @@ $site = Peachy::newWiki( "TPBot" );
 $site->set_runpage("User:TPBot/Run/USGS");
 
 //START GENERATING TRANSCLUSIONS
+
 $i = array();
 //$i = initPage('Template:Coord')->embeddedin( array( 0 ) );
-
-
 //shuffle($i);
 
+//Used for debugging only
 $i[0] = initPage('User:TParis/usgstext');
 
 $intCount = 0;
@@ -40,8 +37,6 @@ foreach ($i as $page) {
 	if (preg_match($pattern, $content) > 0) {
 		$makeChange = false;
 	}
-
-	echo "\n" . preg_replace('/\{\{coord(\|.*)*display=inline\|(.*)\}\}/','{{coord$1display=inline,title|$2}}',$content) . "\n";
 
 	if ($makeChange) {
 		$pattern = "/\{\{coord(\|.*)*display=inline\|(.*)\}\}/";
