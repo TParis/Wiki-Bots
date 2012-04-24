@@ -10,12 +10,14 @@ $site->set_runpage("User:TPBot/Run/USGS");
 
 //START GENERATING TRANSCLUSIONS
 $i = array();
-//$i = initPage('Template:Badimage')->embeddedin( array( 0 ) );
+//$i = initPage('Template:Coord')->embeddedin( array( 0 ) );
 
 
 //shuffle($i);
 
 $i[0] = initPage('User:TParis/usgstext');
+
+$intCount = 0;
 
 foreach ($i as $page) {
 	$content = $page->get_text();
@@ -46,6 +48,12 @@ foreach ($i as $page) {
 	}
 
 	$page->edit($content, "Converting Coord templates, setting format to inline and title", true);
+
+	$intCount++
+	
+	if ($intCount > 60) {
+		break;
+	}
 
 }
 
