@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 ini_set('memory_limit','16M');
 
 require_once( '/home/tparis/Peachy/Init.php' );
@@ -49,8 +52,8 @@ foreach ($i as $page) {
 
 	$page->edit($content, "Converting Coord templates, setting format to inline and title", true);
 
-	$intCount++
-	
+	$intCount++;
+
 	if ($intCount > 60) {
 		break;
 	}
