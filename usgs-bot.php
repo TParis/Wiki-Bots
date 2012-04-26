@@ -8,14 +8,17 @@ $site = Peachy::newWiki( "TPBot" );
 
 $site->set_runpage("User:TPBot/Run/USGS");
 
+//@Param $numOfArticles: Int		Number of article per hour
+$numOfArticles = 10
+
 //START GENERATING TRANSCLUSIONS
 
 $i = array();
-//$i = initPage('Template:Coord')->embeddedin( array( 0 ) );
-//shuffle($i);
+$i = initPage('Template:Coord')->embeddedin( array( 0 ) );
+shuffle($i);
 
 //Used for debugging only
-$i[0] = initPage('User:TParis/usgstext');
+//$i[0] = initPage('User:TParis/usgstext');
 
 $intCount = 0;
 
@@ -50,7 +53,7 @@ foreach ($i as $page) {
 
 	$intCount++;
 
-	if ($intCount > 60) {
+	if ($intCount > $numOfArticles) {
 		break;
 	}
 
