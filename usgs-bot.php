@@ -118,14 +118,25 @@ foreach ($i as $page) {
 		$makeChange = false;
 	}
 
+	echo "\nFirst: " . md5($content) . "\n";
+
 	if ($makeChange) {
-		$pattern = "/\{\{(?:Coord|coord)([a-zA-Z0-9:=_\|]*)(?:display=inline)?([a-zA-Z0-9=\|\.[:blank:]]*)?\}\}/";
-		$replace = "{{coord$1display=inline,title$2}}";
+		$pattern = "/\{\{[Cc]oord((?:\|(?:[^\}\|]*)(?<!\|display=inline)(?=[\|\}]))*)(?:\|display=inline)?([^\}]*?)\}\}/";
+		$replace = "{{coord$1$2|display=inline,title}}";
+		//$pattern = "/\{\{(?:Coord|coord)([a-zA-Z0-9:=_\|]*)(?:display=inline)?([a-zA-Z0-9=\|\.[:blank:]]*)?\}\}/";
+		//$replace = "{{coord$1display=inline,title$2}}";
 
 		echo "\nSetting a title on the first coord template...\n";
 		$content = preg_replace($pattern,$replace,$content, 1);
+
+
+		//Some cleanup
+		$content = str_replace("|||display", "|display", $content);
+		$content = str_replace("||display", "|display", $content);
+
 		$updateArticle = true;
 	}
+	echo "\nAfter: " . md5($content) . "\n";
 
 	if ($originalcontent == $content) {
 		echo "Same!!!";
