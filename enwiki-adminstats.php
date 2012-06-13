@@ -21,13 +21,13 @@ $u = initPage('Template:Adminstats')->embeddedin( array( 2, 3 ) );
 $admins = $site->allusers( null, array( 'sysop' ), null, false, array( 'blockinfo', 'groups', 'editcount', 'registration' ), null );
 
 shuffle($u);
-// = array("User talk:Cyberpower678");
+// = array("User talk:TParis");
 
 foreach ($u as $name) {
-   $issysop = false;
+	$issysop = false;
 	preg_match("/User( talk)?:([^\/]*)/i", $name, $m);
 	foreach( $admins as $admin ) {
-		if( in_array( $rawuser, $admin ) ) {
+		if( in_array( $m[2], $admin ) ) {
 			$issysop = true;
 		}
 	}
@@ -35,7 +35,7 @@ foreach ($u as $name) {
 		process($m[2]);	
 	}
 	else {
-		$out = "'''$m[2] is not an administrator.\nTherefore they have disallowed the use of adminstats.'''";
+		$out = "'''$m[2] is not an administrator.<br>Therefore they have been disallowed the use of adminstats.'''";
 		echo $out;
 		echo "\n";
 		$toedit = "Template:Adminstats/$m[2]";
