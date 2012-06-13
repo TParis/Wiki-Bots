@@ -27,8 +27,9 @@ foreach ($u as $name) {
 	$issysop = false;
 	preg_match("/User( talk)?:([^\/]*)/i", $name, $m);
 	foreach( $admins as $admin ) {
-		if( in_array( $m[2], $admin ) ) {
+		if( $m[2] == $admin['name'] ) {
 			$issysop = true;
+			print_r($admin);
 		}
 	}
 	if( $issysop ) {
